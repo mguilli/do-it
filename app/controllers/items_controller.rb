@@ -64,6 +64,7 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
+      @list = List.find(params[:list_id])
       @item = Item.find(params[:id])
     end
 
