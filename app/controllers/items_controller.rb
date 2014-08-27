@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to @list, notice: 'Item was successfully created.'       
     else
-      render action: 'new'
+      redirect_to :back
     end
   end
 
@@ -45,9 +45,10 @@ class ItemsController < ApplicationController
   def destroy
     @list = List.find(params[:list_id])
 
-    @item.destroy
-    respond_to do |format|
-      format.html { redirect_to @list}
+    if @item.destroy
+      redirect_to @list, notice: 'Item was successfully completed.'
+    else
+      redirect_to :back
     end
   end
 
