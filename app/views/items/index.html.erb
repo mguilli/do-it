@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Days Left</th>
       <th>Completed</th>
       <th></th>
       <th></th>
@@ -15,6 +16,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.name %></td>
+        <td><%= item.days_left %></td>
         <td><%= item.completed %></td>
       </tr>
     <% end %>
