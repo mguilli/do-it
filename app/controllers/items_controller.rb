@@ -36,10 +36,8 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @list, notice: 'Item was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,7 +47,7 @@ class ItemsController < ApplicationController
 
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to :back}
+      format.html { redirect_to @list}
     end
   end
 

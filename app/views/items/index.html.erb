@@ -18,6 +18,7 @@
         <td><%= item.name %></td>
         <td><%= item.days_left %></td>
         <td><%= item.completed %></td>
+        <td><%= link_to 'Edit', edit_list_item_path(@list, item) %></td>
         <td><%= link_to 'Completed', [@list, item], method: :delete %></td>
       </tr>
     <% end %>
