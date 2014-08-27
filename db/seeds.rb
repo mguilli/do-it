@@ -7,7 +7,6 @@ require 'faker'
       item = Item.create(
         name: "User#{i+1}_List#{j+1}_Item#{k+1}",
         list_id: j+1,
-        completed: false
       )
 
       if i == 1
