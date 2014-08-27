@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
+    @list = List.find(params[:list_id])
     @items = Item.all
   end
 
@@ -14,6 +15,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @list = List.find(params[:list_id])
+    @item = Item.find(params[:id])
   end
 
   def create
@@ -28,9 +31,11 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @list = List.find(params[:list_id])
+
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to @list, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -40,10 +45,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @list = List.find(params[:list_id])
+
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url }
-      format.json { head :no_content }
+      format.html { redirect_to :back}
     end
   end
 
@@ -51,7 +57,6 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
-      @list = @item.list
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
