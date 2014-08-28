@@ -8,11 +8,14 @@ gem 'pry'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-# Use devise
+# Use devise for user authentication
 gem 'devise'
 
-# Use pundit
+# Use pundit for access authorization
 gem 'pundit'
+
+# Use figaro for sensitive data masking
+gem 'figaro'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
