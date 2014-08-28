@@ -1,27 +1,31 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy] #do
+  before_action :set_list
+    # :set_item, only: [:show, :edit, :update, :destroy]
+  # end
 
   def index
-    @list = List.find(params[:list_id])
-    @items = Item.all
+    authorize @list #Checks policy for authorization of parent List ownership
+    @items = @list.items.all
+    # authorize @items
   end
 
   def show
+    authorize @item
   end
 
   def new
-    @list = List.find(params[:list_id])
-    @item = Item.new
+   @item = Item.new
+   authorize @item
   end
 
   def edit
-    @list = List.find(params[:list_id])
-    @item = Item.find(params[:id])
+    authorize @item
   end
 
   def create
-    @list = List.find(params[:list_id])
-    @item = @list.items.build(item_params)
+   @item = @list.items.build(item_params)
+   authorize @item
 
     if @item.save
       redirect_to @list, notice: 'Item was successfully created.'       
@@ -31,7 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @list = List.find(params[:list_id])
+    authorize @item
 
     respond_to do |format|
       if @item.update(item_params)
@@ -43,7 +47,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @list = List.find(params[:list_id])
+    authorize @item
 
     if @item.destroy
       redirect_to @list, notice: 'Item was successfully completed.'
@@ -56,6 +60,10 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def set_list
+      @list = List.find(params[:list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,6 +11,11 @@
   <div class='container'>
     <ul class='nav nav-tabs'>
       <li><%= link_to 'Do It!', root_path %></li>
+      <li>
+        <% if current_user %>
+          <%= link_to 'My Lists', lists_path %>
+        <% end %>
+      </li>
 
       <div class="pull-right user-info">
         <% if current_user %>

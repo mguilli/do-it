@@ -1,32 +1,33 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
-  # GET /lists
-  # GET /lists.json
   def index
-    @lists = current_user.lists.all
+    if current_user
+      @lists = current_user.lists.all
+      # authorize @lists
+    else
+      redirect_to root_path, alert: 'You must Sign In to see your lists!'
+    end
   end
 
-  # GET /lists/1
-  # GET /lists/1.json
   def show
     @items = @list.items
     @item = Item.new
+    authorize @list
   end
 
-  # GET /lists/new
   def new
     @list = List.new
+    authorize @list
   end
 
-  # GET /lists/1/edit
   def edit
+    authorize @list
   end
 
-  # POST /lists
-  # POST /lists.json
   def create
     @list = current_user.lists.build(list_params)
+    authorize @list
 
     respond_to do |format|
       if @list.save
@@ -39,9 +40,8 @@ class ListsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lists/1
-  # PATCH/PUT /lists/1.json
   def update
+    authorize @list
     respond_to do |format|
       if @list.update(list_params)
         format.html { redirect_to @list, notice: 'List was successfully updated.' }
@@ -53,9 +53,8 @@ class ListsController < ApplicationController
     end
   end
 
-  # DELETE /lists/1
-  # DELETE /lists/1.json
   def destroy
+    authorize @list
     @list.destroy
     respond_to do |format|
       format.html { redirect_to lists_url }

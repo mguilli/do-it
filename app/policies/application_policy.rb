@@ -7,15 +7,16 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    user_owned?
   end
 
   def show?
     scope.where(:id => record.id).exists?
+    user_owned?
   end
 
   def create?
-    false
+    user_owned?
   end
 
   def new?
@@ -23,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    user_owned?
   end
 
   def edit?
@@ -31,11 +32,17 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    user_owned?
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
+    record.class
+  end
+
+  private
+
+  def user_owned?
+    user.present? && (record.user == user)
   end
 end
 
