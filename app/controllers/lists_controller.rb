@@ -2,12 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user
-      @lists = current_user.lists.all
-      # authorize @lists
-    else
-      redirect_to root_path, alert: 'You must Sign In to see your lists!'
-    end
+    @lists = policy_scope(List)
   end
 
   def show

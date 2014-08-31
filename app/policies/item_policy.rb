@@ -4,6 +4,13 @@ class ItemPolicy < ApplicationPolicy
     false   
   end
 
+  def index?
+    # (record.user == user)
+    # true
+    # user_owned?
+    false
+  end
+
   private
 
   def user_owned?

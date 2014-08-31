@@ -1,13 +1,11 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy] #do
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_list
-    # :set_item, only: [:show, :edit, :update, :destroy]
-  # end
 
-  def index
-    authorize @list #Checks policy for authorization of parent List ownership
+  def index 
+    authorize @list
     @items = @list.items.all
-    # authorize @items
+    # @items = policy_scope(List).find(@list.id).items
   end
 
   def show

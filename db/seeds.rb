@@ -16,7 +16,7 @@ require 'faker'
         item.list_id += 2
       end
 
-      item.update_attribute(:created_at, rand(10.minutes .. 6.days).ago)
+      item.update_attribute(:created_at, ( k + 5 ).days.ago)
     end
   end
 end
