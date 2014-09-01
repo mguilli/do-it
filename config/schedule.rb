@@ -14,7 +14,7 @@
 # end
 #
 
-every 1.day, at: '4:42 pm' do
+every 1.day, at: '9:46 pm' do
   rake "delete_items"
 end
 
