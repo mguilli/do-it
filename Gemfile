@@ -6,8 +6,14 @@ gem 'rails', '4.0.5'
 gem 'pry'
 
 gem 'whenever', require: false
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+group :development do
+  gem 'sqlite3'
+end
 
 # Use devise for user authentication
 gem 'devise'
