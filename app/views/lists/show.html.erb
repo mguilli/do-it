@@ -1,14 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Label:</strong>
-  <%= @list.label %>
-</p>
-
-<p>
-  <%= render partial: 'items/form' %>
-</p>
-
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
-<%= render template: 'items/index' %>
+<div class="row">
+  <div class="col-md-12">
+    <%= render template: 'items/index' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <%= render partial: 'items/form' %>
+  </div>
+</div>

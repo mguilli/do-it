@@ -1,23 +1,27 @@
-<h1>Listing items</h1>
+<h3>List: <%= @list.label %></h3>
+<%= link_to 'Back', lists_path %>
 
-<table>
+
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Task Item</th>
       <th>Days Left</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Options</th>
     </tr>
   </thead>
 
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name %></td>
+        <td>
+          <%= item.name %> |
+          <%= link_to 'Edit', edit_list_item_path(@list, item) %>
+        </td>
         <td><%= item.days_left %></td>
-        <td><%= link_to 'Edit', edit_list_item_path(@list, item) %></td>
-        <td><%= link_to 'Completed', [@list, item], method: :delete %></td>
+        <td>
+          <%= link_to 'Completed', [@list, item], method: :delete %>
+        </td>
       </tr>
     <% end %>
   </tbody>
